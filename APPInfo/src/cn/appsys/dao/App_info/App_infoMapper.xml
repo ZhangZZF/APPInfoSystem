@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.appsys.dao.App_info.App_infoMapper">
+	<select id="app_infolist" resultMap="app_infolistMap"  parameterType="App_Sun">
+		SELECT
+		info.id,softwareName,APKName,softwareSize,info.flatformId,dic.valueName,
+		(SELECT valueName FROM data_dictionary WHERE typeCode = 'APP_STATUS'
+		AND valueId = `status`) AS statsName,
+		info.status,categoryName,
+		(SELECT
+		categoryName FROM app_category WHERE id = info.categoryLevel2)
+		AS
+		cateGoryName2,
+		(SELECT categoryName FROM app_category WHERE id =
+		info.categoryLevel3) AS
+		cateGoryName3,
+		downloads,
+		(SELECT versionNo FROM
+		app_version WHERE app_version.id = info.versionId) AS
+		versionNo,
+		info.versionId
+		FROM app_info AS info
+		INNER JOIN data_dictionary AS dic
+		ON dic.typeCode =
+		'APP_FLATFORM' AND dic.valueId = info.flatformId
+		INNER JOIN
+		app_category AS cate ON info.categoryLevel1 = cate.id
+
+	</select>
+	<resultMap type="cn.appsys.pojo.App_Sun" id="app_infolistMap">
+		<result column="id" property="id"/>
+		<result column="softwareName" property="softwareName"/>
+		<result column="APKName" property="APKName"/>
+		<result column="softwareSize" property="softwareSize"/>
+		<result column="flatformName" property="flatformName"/>
+		<result column="cateGoryLevelName1" property="cateGoryLevelName1"/>
+		<result column="cateGoryLevelName2" property="cateGoryLevelName2"/>
+		<result column="cateGoryLevelName3" property="cateGoryLevelName3"/>
+		<result column="statusName" property="statusName"/>
+		<result column="downloads" property="downloads"/>
+		<result column="versionId" property="versionId"/>
+	</resultMap>
+</mapper>

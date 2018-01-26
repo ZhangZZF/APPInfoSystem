@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.appsys.dao.Dev_user.Dev_userMapper">
+	<select id="getLoginUser" resultType="Dev_user" parameterType="String">
+		select * from dev_user
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="devCode!=null">
+				 devCode=#{devCode}
+			</if>
+		</trim>
+	</select>
+</mapper>
