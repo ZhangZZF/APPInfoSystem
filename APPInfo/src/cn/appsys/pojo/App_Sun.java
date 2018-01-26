@@ -227,5 +227,5 @@ public class App_Sun {
 	public void setVersionNo(String versionNo) {
 		this.versionNo = versionNo;
 	}
-	
+	//总类
 }
