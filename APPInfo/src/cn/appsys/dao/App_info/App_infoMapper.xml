@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'APP_FLATFORM' AND dic.valueId = info.flatformId
 		INNER JOIN
 		app_category AS cate ON info.categoryLevel1 = cate.id
-
+		sss
 	</select>
 	<resultMap type="cn.appsys.pojo.App_Sun" id="app_infolistMap">
 		<result column="id" property="id"/>
